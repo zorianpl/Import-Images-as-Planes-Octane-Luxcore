@@ -21,7 +21,7 @@
 bl_info = {
     "name": "Import Images as Planes - Cycles, Eevee, Luxcore Octane Support",
     "author": "Florian Meyer (tstscr), mont29, matali, Ted Schundler (SpkyElctrc), Ed O'Connell, Adam Zorian Radziszewski",
-    "version": (4, 0, 0),
+    "version": (4, 0, 1),
     "blender": (4, 0, 0),
     "location": "File > Import > Images as Planes or Add > Mesh > Images as Planes",
     "description": "Imports images and creates planes with the appropriate aspect ratio. "
@@ -1169,6 +1169,7 @@ class IMPORT_IMAGE_OT_to_plane(Operator, AddObjectHelper):
             node_tree.links.new(core_shader.inputs['Opacity'], alpha_tex_image.outputs[0])
 
         node_tree.links.new(out_node.inputs['Surface'], core_shader.outputs[0])
+        out_node.target = 'octane'
 
         auto_align_nodes(node_tree)
         return material
